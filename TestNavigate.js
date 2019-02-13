@@ -5,13 +5,8 @@ export default class TestNavigate extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Add friends here!</Text>
-                <Button
-                    title="Add some friends"
-                    onPress={() =>
-                        this.props.navigation.navigate('Main')
-                    }
-                />
+                <Text onPress={() =>
+                    this.props.navigation.navigate('Main')}> Add friends here! </Text>
             </View>
         );
     }
