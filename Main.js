@@ -13,6 +13,7 @@ newTodoItemController = textValue => {
     });
 };
 export default class Main extends React.Component {
+    static navigationOptions = { header: null };
     render() {
         //const { heigh, width } = Dimensions.get('window');
         return (
