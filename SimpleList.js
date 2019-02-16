@@ -1,26 +1,16 @@
 import React, { Component } from "react";
 // Got this app: https://codeburst.io/todo-app-with-react-native-f889e97e398e
 import {
-    AppRegistry,
-    StyleSheet,
     Text,
     View,
     FlatList,
     AsyncStorage,
     Button,
-    TextInput,
-    Keyboard,
-    Platform
 } from "react-native";
 // my code 
-//import SimpleList from './SimpleList';
+import styles from './styles';
 
-const isAndroid = Platform.OS == "android";
-const viewPadding = 10;
-
-
-export default class Main extends Component {
-    //static navigationOptions = { header: null }
+export default class SimpleList extends Component {
     state = {
         tasks: [],
         text: ""
@@ -28,24 +18,6 @@ export default class Main extends Component {
     changeTextHandler = text => {
         this.setState({ text: text });
     };
-
-    addTask = () => {
-        let notEmpty = this.state.text.trim().length > 0;
-
-        if (notEmpty) {
-            this.setState(
-                prevState => {
-                    let { tasks, text } = prevState;
-                    return {
-                        tasks: tasks.concat({ key: tasks.length, text: text }),
-                        text: ""
-                    };
-                },
-                () => Tasks.save(this.state.tasks)
-            );
-        }
-    };
-
     deleteTask = i => {
         this.setState(
             prevState => {
@@ -60,24 +32,12 @@ export default class Main extends Component {
     };
 
     componentDidMount() {
-        Keyboard.addListener(
-            isAndroid ? "keyboardDidShow" : "keyboardWillShow",
-            e => this.setState({ viewPadding: e.endCoordinates.height + viewPadding })
-        );
-
-        Keyboard.addListener(
-            isAndroid ? "keyboardDidHide" : "keyboardWillHide",
-            () => this.setState({ viewPadding: viewPadding })
-        );
-
         Tasks.all(tasks => this.setState({ tasks: tasks || [] }));
     }
 
     render() {
         return (
-            <View
-                style={[styles.container, { paddingBottom: this.state.viewPadding }]}
-            >
+            <View style={styles.SimpleContainer}>
                 <FlatList
                     style={styles.list}
                     keyExtractor={(item) => item.key.toString()}
@@ -85,11 +45,12 @@ export default class Main extends Component {
                     renderItem={({ item, index }) =>
                         <View>
                             <View style={styles.listItemCont}>
-
                                 <Text style={styles.listItem}>
                                     {item.text}
                                 </Text>
-                                <Button title="X" onPress={() => this.deleteTask(index)} />
+                                <View>
+                                    <Button title="X" onPress={() => this.deleteTask(index)} />
+                                </View>
                             </View>
                             <View style={styles.hr} />
                         </View>}
@@ -117,44 +78,5 @@ let Tasks = {
     save(tasks) {
         AsyncStorage.setItem("TASKS", this.convertToStringWithSeparators(tasks));
     }
+
 };
-
-const styles = StyleSheet.create({
-    container: {
-        //flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        //backgroundColor: "#F5FCFF",
-        padding: viewPadding,
-        paddingTop: 20
-    },
-    list: {
-        width: "100%"
-    },
-    listItem: {
-        paddingTop: 2,
-        paddingLeft: 5,
-        paddingBottom: 2,
-        fontSize: 18
-    },
-    hr: {
-        height: 1,
-        backgroundColor: "gray"
-    },
-    listItemCont: {
-        marginTop: 5,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between"
-    },
-    textInput: {
-        height: 40,
-        paddingRight: 10,
-        paddingLeft: 10,
-        borderColor: "gray",
-        borderWidth: isAndroid ? 0 : 1,
-        width: "100%"
-    }
-});
-
-AppRegistry.registerComponent("TodoList", () => TodoList);

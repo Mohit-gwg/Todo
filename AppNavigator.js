@@ -7,7 +7,7 @@ import { createAppContainer } from 'react-navigation';
 // you can also import from @react-navigation/native
 //https://reactnavigation.org/docs/en/app-containers.html follow this link to setup navigation.
 const AppNavigator = createStackNavigator({
-    TestNavigate: { screen: TestNavigate },
+    //TestNavigate: { screen: TestNavigate },
     Main: { screen: Main },
     SimpleList: { screen: SimpleList },
 });
