@@ -80,6 +80,7 @@ export default class Main extends Component {
             >
                 <FlatList
                     style={styles.list}
+                    keyExtractor={(item) => item.key.toString()}
                     data={this.state.tasks}
                     renderItem={({ item, index }) =>
                         <View>

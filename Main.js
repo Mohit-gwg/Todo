@@ -96,7 +96,7 @@ export default class Main extends Component {
                     placeholder="Add Tasks"
                     returnKeyType="done"
                     returnKeyLabel="done"
-                    underlineColorAndroid={isFocused ? BLUE : LIGHT_GRAY}
+                    //underlineColorAndroid={isFocused ? BLUE : LIGHT_GRAY}
                     onFocus={this.handleFocus}
                 />
                 <Button
