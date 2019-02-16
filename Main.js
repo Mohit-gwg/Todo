@@ -12,12 +12,12 @@ import {
 // my code 
 import SimpleList from './SimpleList';
 import styles from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
 const BLUE = "#ff0066";
 const LIGHT_GRAY = "#ff0066";
-
-
 export default class Main extends Component {
     static navigationOptions = { header: null }
     state = {
@@ -82,6 +82,7 @@ export default class Main extends Component {
                     underlineColorAndroid={isFocused ? BLUE : LIGHT_GRAY}
                     onFocus={this.handleFocus}
                 />
+                <Icon name="twitter" size={65} color='black' />
                 <Button
                     onPress={() => this.props.navigation.navigate('SimpleList')}
                     title="Show Todo"
