@@ -6,7 +6,7 @@ export default class TestNavigate extends React.Component {
         return (
             <View style={styles.container}>
                 <Text onPress={() =>
-                    this.props.navigation.navigate('Main')}> Add friends here! </Text>
+                    this.props.navigation.navigate('Main')}> Todo Note App </Text>
             </View>
         );
     }

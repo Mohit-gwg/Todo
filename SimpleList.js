@@ -13,27 +13,18 @@ import {
     Platform
 } from "react-native";
 // my code 
-import SimpleList from './SimpleList';
+//import SimpleList from './SimpleList';
 
 const isAndroid = Platform.OS == "android";
-const viewPadding = 5;
-const BLUE = "#428AF8";
-const LIGHT_GRAY = "D3D3D3";
+const viewPadding = 10;
 
 
 export default class Main extends Component {
-    static navigationOptions = { header: null }
+    //static navigationOptions = { header: null }
     state = {
         tasks: [],
-        text: "",
-        isFocused: false,
+        text: ""
     };
-    handleFocus = event => {
-        this.setState({ isFocused: true })
-        if (this.props.onFocus)
-            this.props.onFocus(event);
-    }
-
     changeTextHandler = text => {
         this.setState({ text: text });
     };
@@ -83,27 +74,25 @@ export default class Main extends Component {
     }
 
     render() {
-        const { isFocused } = this.state;
         return (
             <View
                 style={[styles.container, { paddingBottom: this.state.viewPadding }]}
             >
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={this.changeTextHandler}
-                    onSubmitEditing={this.addTask}
-                    value={this.state.text}
-                    placeholder="Add Tasks"
-                    returnKeyType="done"
-                    returnKeyLabel="done"
-                    underlineColorAndroid={isFocused ? BLUE : LIGHT_GRAY}
-                    onFocus={this.handleFocus}
-                />
-                <Button
-                    onPress={() => this.props.navigation.navigate('SimpleList')}
-                    title="Show Todo"
-                />
+                <FlatList
+                    style={styles.list}
+                    data={this.state.tasks}
+                    renderItem={({ item, index }) =>
+                        <View>
+                            <View style={styles.listItemCont}>
 
+                                <Text style={styles.listItem}>
+                                    {item.text}
+                                </Text>
+                                <Button title="X" onPress={() => this.deleteTask(index)} />
+                            </View>
+                            <View style={styles.hr} />
+                        </View>}
+                />
             </View>
         );
     }
@@ -131,10 +120,10 @@ let Tasks = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        //flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#F5FCFF",
+        //backgroundColor: "#F5FCFF",
         padding: viewPadding,
         paddingTop: 20
     },
@@ -158,13 +147,9 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     textInput: {
-
-        //
         height: 40,
-        marginTop: 95,
         paddingRight: 10,
         paddingLeft: 10,
-        paddingBottom: 20,
         borderColor: "gray",
         borderWidth: isAndroid ? 0 : 1,
         width: "100%"
