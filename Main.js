@@ -13,6 +13,8 @@ import {
 import SimpleList from './SimpleList';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+//import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+//import { Fumi } from 'react-native-textinput-effects';
 
 const isAndroid = Platform.OS == "android";
 const viewPadding = 10;
@@ -82,17 +84,10 @@ export default class Main extends Component {
                     underlineColorAndroid={isFocused ? BLUE : LIGHT_GRAY}
                     onFocus={this.handleFocus}
                 />
-                <Icon name="twitter" size={65} color='black' />
-                <Button
-                    onPress={() => this.props.navigation.navigate('SimpleList')}
-                    title="Show Todo"
-                />
-
             </View>
         );
     }
 }
-
 let Tasks = {
     convertToArrayOfObject(tasks, callback) {
         return callback(

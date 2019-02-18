@@ -6,13 +6,15 @@ export default styles = StyleSheet.create({
     /////////Main.js////////////////////
 
     container: {
-        justifyContent: "center",
+        flex: 1,
+        //justifyContent: "center",
         alignItems: "center",
         padding: 10,
         paddingTop: 50
     },
     textInput: {
         height: 40,
+        fontSize: 15,
         paddingRight: 10,
         paddingLeft: 10,
         borderColor: "gray",
@@ -23,6 +25,7 @@ export default styles = StyleSheet.create({
     //////////SimpleList.js/////////////////////
     SimpleContainer: {
         flex: 1,
+        marginTop: 24.1,
         justifyContent: "center",
         backgroundColor: 'yellow',
         alignItems: "center",
