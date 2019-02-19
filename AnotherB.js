@@ -17,20 +17,26 @@ export default class AnotherB extends Component {
         }
     }
 
-    async getKey() {
-        try {
-            //const value = await AsyncStorage.getItem('@MySuperStore:key');
-            const key = await AsyncStorage.getItem('@MySuperStore:key');
+    componentDidMount() {
+        // subscribe to the event that we want, in this case 'willFocus'
+        // when the screen is about to focus it will call this.getKey
+        this.willFocusSubscription = this.props.navigation.addListener('willFocus', this.getKey);
+    }
 
+    componentWillUnmount() {
+        // unsubscribe to the event 
+        this.willFocusSubscription.remove();
+    }
+
+    getKey = async () => { // update this to an arrow function so that we can still access this, otherwise we'll get an error trying to setState.
+        try {
+            const key = await AsyncStorage.getItem('@MySuperStore:key');
             this.setState({
                 myKey: key,
             });
         } catch (error) {
             console.log("Error retrieving data" + error);
         }
-    }
-    componentDidMount() {
-        this.getKey();
     }
 
     render() {
@@ -39,10 +45,6 @@ export default class AnotherB extends Component {
         return (
             <View style={styles.container}>
                 <Text>{this.state.myKey}</Text>
-
-                <Button
-                    title='Navigate'
-                />
             </View>
         )
     }

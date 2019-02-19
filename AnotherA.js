@@ -76,10 +76,6 @@ export default class AnotherA extends Component {
                     accessibilityLabel="Reset"
                 />
                 <Text>{this.state.myKey}</Text>
-
-                <Button
-                    title='Navigate'
-                />
             </View>
         )
     }
